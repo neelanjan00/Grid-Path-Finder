@@ -39,10 +39,7 @@ const Home = () => {
     <div>
       <MakeGrid 
         rows={35} cols={70}
-        grid = {grid} 
-        setGrid = {setGrid}
-        startingPosition={startingPosition} 
-        endingPosition={endingPosition} />
+        grid = {grid} />
     </div>
   )
 }
