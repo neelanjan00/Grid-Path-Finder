@@ -6,15 +6,38 @@ import { Dijkstra } from "../../Dijkstra/dijkstra";
 import { ReconstructPath } from "../../utility/path";
 import MakeGrid from "../../components/Grid/grid";
 
-const rows = 25;
-const cols = 50;
+let rows = 25;
+let cols = 60;
+
+// responsive column sizes for various screen widths
+if(window.screen.width < 400) {
+  cols = 15;
+} else if(window.screen.width < 500) {
+  cols = 17;
+} else if(window.screen.width < 600) {
+  cols = 22;
+} else if(window.screen.width < 700) {
+  cols = 25;
+} else if(window.screen.width < 800) {
+  cols = 30;
+} else if(window.screen.width < 900) {
+  cols = 35;
+} else if(window.screen.width < 1000) {
+  cols = 40;
+} else if(window.screen.width < 1100) {
+  cols = 45;
+} else if(window.screen.width < 1200) {
+  cols = 50;
+} else if(window.screen.width < 1300) {
+  cols = 55;
+} 
+
 const newGrid = GetArray(rows, cols, true);
 
 const Home = () => {
   const [startingPosition, setStartingPosition] = useState([]);
   const [endingPosition, setEndingPosition] = useState([]);
   const [isPathVisible, setIsPathVisible] = useState(false);
-
   const [grid, setGrid] = useState(newGrid);
 
   const searchAlgorithms = ["BFS", "DFS", "Dijkstra"];
@@ -86,7 +109,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center", fontWeight: 700 }}>Path Finder</h1>
+      <h1 style={{ textAlign: "center", fontWeight: 1000 }}>Grid Path Finder</h1>
 
       <div
         style={{
@@ -100,8 +123,8 @@ const Home = () => {
           setStartingPosition={setStartingPosition}
           endingPosition={endingPosition}
           setEndingPosition={setEndingPosition}
-          rows={25}
-          cols={50}
+          rows={rows}
+          cols={cols}
           grid={grid}
         />
       </div>
@@ -114,9 +137,10 @@ const Home = () => {
           marginTop: "30px",
         }}
       >
-        {searchAlgorithms.map((algorithm) => {
+        {searchAlgorithms.map((algorithm, i) => {
           return (
             <button
+              key={i}
               onClick={() => tracePath(algorithm)}
               style={{
                 padding: "10px",
