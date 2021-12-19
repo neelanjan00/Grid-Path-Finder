@@ -18,6 +18,7 @@ const Home = () => {
 
   /**
    * tracePath finds a path between the source and the destination and traces it on the grid.
+   * @param {string} algorithm search algorithm name
    */
   const tracePath = (algorithm) => {
     let obj;
