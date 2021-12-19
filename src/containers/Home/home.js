@@ -4,33 +4,34 @@ import { BFS } from "../../BFS/bfs";
 import { DFS } from "../../DFS/dfs";
 import { Dijkstra } from "../../Dijkstra/dijkstra";
 import { ReconstructPath } from "../../utility/path";
-import MakeGrid from "../../components/Grid/grid";
+import { MakeGrid } from "../../components/Grid/grid";
+import { Footer } from "../../components/Footer/footer";
 
 let rows = 25;
 let cols = 60;
 
 // responsive column sizes for various screen widths
-if(window.screen.width < 400) {
+if (window.screen.width < 400) {
   cols = 15;
-} else if(window.screen.width < 500) {
+} else if (window.screen.width < 500) {
   cols = 17;
-} else if(window.screen.width < 600) {
+} else if (window.screen.width < 600) {
   cols = 22;
-} else if(window.screen.width < 700) {
+} else if (window.screen.width < 700) {
   cols = 25;
-} else if(window.screen.width < 800) {
+} else if (window.screen.width < 800) {
   cols = 30;
-} else if(window.screen.width < 900) {
+} else if (window.screen.width < 900) {
   cols = 35;
-} else if(window.screen.width < 1000) {
+} else if (window.screen.width < 1000) {
   cols = 40;
-} else if(window.screen.width < 1100) {
+} else if (window.screen.width < 1100) {
   cols = 45;
-} else if(window.screen.width < 1200) {
+} else if (window.screen.width < 1200) {
   cols = 50;
-} else if(window.screen.width < 1300) {
+} else if (window.screen.width < 1300) {
   cols = 55;
-} 
+}
 
 const newGrid = GetArray(rows, cols, true);
 
@@ -108,82 +109,87 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1 style={{ textAlign: "center", fontWeight: 1000 }}>Grid Path Finder</h1>
+    <>
+      <div className="container-fluid" style={{minHeight: '650px'}}>
+        <h1 style={{ textAlign: "center", fontWeight: 700, marginBottom: '25px', marginTop: '25px' }}>
+          Grid Path Finder
+        </h1>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <MakeGrid
-          startingPosition={startingPosition}
-          setStartingPosition={setStartingPosition}
-          endingPosition={endingPosition}
-          setEndingPosition={setEndingPosition}
-          rows={rows}
-          cols={cols}
-          grid={grid}
-        />
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "30px",
-        }}
-      >
-        {searchAlgorithms.map((algorithm, i) => {
-          return (
-            <button
-              key={i}
-              onClick={() => tracePath(algorithm)}
-              style={{
-                padding: "10px",
-                marginLeft: "10px",
-                paddingLeft: "13px",
-                paddingRight: "13px",
-                borderRadius: "3px",
-                outline: "0",
-                border: "0",
-                cursor: "pointer",
-                backgroundColor: "lightgrey",
-                display:
-                  startingPosition.length !== 0 &&
-                  endingPosition.length !== 0 &&
-                  !isPathVisible
-                    ? "inherit"
-                    : "none",
-              }}
-            >
-              {algorithm}
-            </button>
-          );
-        })}
-
-        <button
-          onClick={() => clearGrid()}
+        <div
           style={{
-            padding: "10px",
-            marginLeft: "10px",
-            paddingLeft: "13px",
-            paddingRight: "13px",
-            borderRadius: "3px",
-            outline: "0",
-            border: "0",
-            cursor: "pointer",
-            backgroundColor: "lightgrey",
-            display: isPathVisible ? "inherit" : "none",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          Clear Grid
-        </button>
+          <MakeGrid
+            startingPosition={startingPosition}
+            setStartingPosition={setStartingPosition}
+            endingPosition={endingPosition}
+            setEndingPosition={setEndingPosition}
+            rows={rows}
+            cols={cols}
+            grid={grid}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "30px",
+          }}
+        >
+          {searchAlgorithms.map((algorithm, i) => {
+            return (
+              <button
+                key={i}
+                onClick={() => tracePath(algorithm)}
+                style={{
+                  padding: "10px",
+                  marginLeft: "10px",
+                  paddingLeft: "13px",
+                  paddingRight: "13px",
+                  borderRadius: "3px",
+                  outline: "0",
+                  border: "0",
+                  cursor: "pointer",
+                  backgroundColor: "lightgrey",
+                  display:
+                    startingPosition.length !== 0 &&
+                    endingPosition.length !== 0 &&
+                    !isPathVisible
+                      ? "inherit"
+                      : "none",
+                }}
+              >
+                {algorithm}
+              </button>
+            );
+          })}
+
+          <button
+            onClick={() => clearGrid()}
+            style={{
+              padding: "10px",
+              marginLeft: "10px",
+              paddingLeft: "13px",
+              paddingRight: "13px",
+              borderRadius: "3px",
+              outline: "0",
+              border: "0",
+              cursor: "pointer",
+              backgroundColor: "lightgrey",
+              display: isPathVisible ? "inherit" : "none",
+            }}
+          >
+            Clear Grid
+          </button>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
