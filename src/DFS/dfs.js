@@ -1,7 +1,7 @@
 import { GetArray } from "../utility/array";
 
 /**
- * 
+ * DFS finds a path between the source and the destination using DFS algorithm. It returns the parent and visited array when the end position is found.
  * @param {number[]} start starting position coordinates
  * @param {number[]} end ending position coordinates
  * @param {number} rows number of rows in the graph 2D array

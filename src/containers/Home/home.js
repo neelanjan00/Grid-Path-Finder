@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GetArray } from "../../utility/array";
 import { BFS } from "../../BFS/bfs";
 import { DFS } from "../../DFS/dfs";
+import { Dijkstra } from "../../Dijkstra/dijkstra";
 import { ReconstructPath } from "../../utility/path";
 import MakeGrid from "../../components/Grid/grid";
 
@@ -14,7 +15,7 @@ const Home = () => {
 
   const [grid, setGrid] = useState(GetArray(rows, cols, true));
 
-  const searchAlgorithms = ["BFS", "DFS"];
+  const searchAlgorithms = ["BFS", "DFS", "Dijkstra"];
 
   /**
    * tracePath finds a path between the source and the destination and traces it on the grid.
@@ -30,6 +31,10 @@ const Home = () => {
 
       case "DFS":
         obj = DFS(startingPosition, endingPosition, rows, cols, grid);
+        break;
+
+      case "Dijkstra":
+        obj = Dijkstra(startingPosition, endingPosition, rows, cols, grid);
         break;
 
       default:
