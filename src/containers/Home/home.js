@@ -6,14 +6,16 @@ import { Dijkstra } from "../../Dijkstra/dijkstra";
 import { ReconstructPath } from "../../utility/path";
 import MakeGrid from "../../components/Grid/grid";
 
-const Home = () => {
-  const rows = 25;
-  const cols = 50;
+const rows = 25;
+const cols = 50;
+const newGrid = GetArray(rows, cols, true);
 
+const Home = () => {
   const [startingPosition, setStartingPosition] = useState([]);
   const [endingPosition, setEndingPosition] = useState([]);
+  const [isPathVisible, setIsPathVisible] = useState(false);
 
-  const [grid, setGrid] = useState(GetArray(rows, cols, true));
+  const [grid, setGrid] = useState(newGrid);
 
   const searchAlgorithms = ["BFS", "DFS", "Dijkstra"];
 
@@ -68,6 +70,18 @@ const Home = () => {
     });
 
     setGrid(newGrid);
+    setIsPathVisible(true);
+  };
+
+  /**
+   * clearGrid clears the traced path, starting position and ending position
+   */
+  const clearGrid = () => {
+    setEndingPosition([]);
+    setStartingPosition([]);
+    setGrid(newGrid);
+
+    setIsPathVisible(false);
   };
 
   return (
@@ -115,7 +129,9 @@ const Home = () => {
                 cursor: "pointer",
                 backgroundColor: "lightgrey",
                 display:
-                  startingPosition.length !== 0 && endingPosition.length !== 0
+                  startingPosition.length !== 0 &&
+                  endingPosition.length !== 0 &&
+                  !isPathVisible
                     ? "inherit"
                     : "none",
               }}
@@ -124,6 +140,24 @@ const Home = () => {
             </button>
           );
         })}
+
+        <button
+          onClick={() => clearGrid()}
+          style={{
+            padding: "10px",
+            marginLeft: "10px",
+            paddingLeft: "13px",
+            paddingRight: "13px",
+            borderRadius: "3px",
+            outline: "0",
+            border: "0",
+            cursor: "pointer",
+            backgroundColor: "lightgrey",
+            display: isPathVisible ? "inherit" : "none",
+          }}
+        >
+          Clear Grid
+        </button>
       </div>
     </div>
   );
